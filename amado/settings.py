@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "cart",
     "checkout",
     "products",
+    "newsletter",
     'rest_framework',
     'rest_framework.authtoken',
 ]
