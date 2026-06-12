@@ -1,0 +1,28 @@
+from rest_framework import generics
+from products.models import Product,Category,Brand
+from products.serializers import BrandSerializer, ProductSerializer
+from products.serializers import CategorySerializer
+
+class ProductListView(generics.ListAPIView):
+    queryset=Product.objects.filter(is_active=True)
+    serializer_class=ProductSerializer
+
+
+
+class ProductDetailView(generics.RetrieveAPIView):
+    queryset=Product.objects.filter(is_active=True)
+    serializer_class=ProductSerializer
+
+
+
+
+class CategoryListView(generics.ListAPIView):
+    queryset=Category.objects.all()
+    serializer_class=CategorySerializer
+
+
+class BrandListView(generics.ListAPIView):
+    queryset=Brand.objects.all()
+    serializer_class=BrandSerializer
+
+

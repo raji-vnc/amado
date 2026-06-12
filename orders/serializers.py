@@ -1,43 +1,26 @@
 from rest_framework import serializers
-from .models import Order, OrderItem
+from .models import(ShippingAddress,Order,OrderItem,Payment)
 
+
+class ShippingAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ShippingAddress
+        fields='__all__'
 
 class OrderItemSerializer(serializers.ModelSerializer):
-    """Serializer for an individual item inside an Order."""
-
     class Meta:
-        model = OrderItem
-        fields = (
-            "id",
-            "product_name",
-            "quantity",
-            "unit_price",
-            "line_total",
-        )
-        read_only_fields = ("id", "line_total")
+        model=OrderItem
+        fields='__all__'
 
+
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Payment
+        fields='__all__'
 
 class OrderSerializer(serializers.ModelSerializer):
-    """Serializer for Order with nested OrderItem data."""
-
-    items = OrderItemSerializer(many=True, read_only=True)
-
+    items=OrderItemSerializer(many=True, read_only=True)
+    payment=PaymentSerializer(read_only=True)
     class Meta:
-        model = Order
-        fields = (
-            "id",
-            "user",
-            "status",
-            "total_amount",
-            "created_at",
-            "updated_at",
-            "items",
-        )
-        read_only_fields = (
-            "id",
-            "user",
-            "total_amount",
-            "created_at",
-            "updated_at",
-            "items",
-        )
+        model=Order
+        fields='__all__'
